@@ -1,0 +1,61 @@
+1- to start project: 
+
+>> npm install create-react-app -g
+>> create-react-app projectName
+
+2- to run backend & frontend server in same time:
+
+a) >> npm i concurrently
+b) in package.json
+ 
+    "scripts": {
+    "start": "node backend/app",   //app is name of file.js in project
+    "server": "nodemon backend/app",
+    "client": "npm start --prefix frontend",  //frontend is name of project
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  }
+
+  >>npm run dev
+
+3- to setup server environment: 
+
+a) >>npm i dotenv
+b) in app.js: 
+
+   const dotenv = require ('dotenv')
+   dotenv.config()
+c) create file in the root of the project (.env) and write:
+ 
+   NODE_ENV = developement
+   PORT = 5000
+
+d) in app.js: 
+   
+   const PORT = process.env.PORT || 5000
+   app.listen(PORT, console.log(`server running in ${process.env.NODE_ENV} on port ${process.env.PORT}`))
+
+4- to use ES6 sytax in node (instead of "const express = require ('express')" we use "import")
+
+   in package.json: 
+
+   "name": "proshop",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "type": "module", >>>>>>>>>>>>>>>>> this what we add
+
+5- to start using redux store: 
+
+a) in terminal
+      >> cd frontend
+      >> npm i redux react-redux redux-thunk redux-devtools-extension
+b) create file in src ---> store.js & write code 
+c) to use redux in our app , use provide in index.js:
+
+               import {Provider} from 'react-redux'
+               import store from './store'
+               <Provider store={store}>
+                    <App />
+               </Provider>
+d) create reducer folder and in it reducers files ---> it contains state & actions ---> import reducers in store.js to be used
+e) 
